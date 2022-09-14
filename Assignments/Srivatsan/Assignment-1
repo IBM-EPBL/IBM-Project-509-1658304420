@@ -1,1 +1,30 @@
+Tinkercad link: https://www.tinkercad.com/things/4MwgVvxEZMO-smart-home-burglar-alarm
+
+// Smart Home Automation -Burglar Alarm
+void setup()
+{
+  pinMode(4,INPUT);
+  pinMode(12,OUTPUT);
+  pinMode(13,OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int p=digitalRead(4);
+  Serial.println(p);
+  if(p)
+  {
+    Serial.println(p);
+    tone(12,30);
+    digitalWrite(13,HIGH);
+    delay(100);
+    digitalWrite(13,LOW);
+    delay(100);
+}
+  noTone(12);
+  delay(1000);
+}
+
+
 
