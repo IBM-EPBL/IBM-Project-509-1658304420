@@ -1,1 +1,53 @@
+Tinkercad link: https://www.tinkercad.com/things/4MwgVvxEZMO
+Code:
+// Smart Home
+int ldrvalue=0;
+void setup()
+{
+  pinMode(4,INPUT);
+  pinMode(12,OUTPUT);
+  pinMode(13,OUTPUT);
+  pinMode(6,OUTPUT);
+  pinMode(2,OUTPUT);
+  pinMode(3,INPUT);
+  pinMode(A0,INPUT);
+  Serial.begin(9600);
+}
 
+void loop()
+{
+  //burglar alarm
+  int p=digitalRead(4);
+  if(p)
+  {
+    tone(12,30);
+    delay(1000);
+    
+  }
+  noTone(12);
+  delay(1000);
+  
+  //ultrasonic sensor
+  digitalWrite(2,LOW);
+  digitalWrite(2,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(2,LOW);
+  float dur=pulseIn(3,HIGH);
+  float dis=(dur*0.034)/2;
+  Serial.print("Ultrasonic dis=");
+  Serial.println(dis);
+  if(dis<50)
+  {
+    digitalWrite(13,HIGH);
+    delay(1000);
+    digitalWrite(13,LOW);
+    delay(1000);
+
+  }
+  //LDR
+  ldrvalue=analogRead(A0);
+  Serial.print("LDR dis=");
+  Serial.println(ldrvalue);
+  analogWrite(6,map(ldrvalue,0,1023,0,255));
+  delay(1000);
+}
